@@ -47,7 +47,8 @@ export default class PosterSessionAreaController extends (EventEmitter as new ()
    */
   constructor(posterSessionAreaModel: PosterSessionAreaModel) {
     super();
-    // TODO
+    this._model = posterSessionAreaModel;
+    this._playersWhoStarred = new Array<string>();
   }
 
   /**
@@ -56,14 +57,14 @@ export default class PosterSessionAreaController extends (EventEmitter as new ()
    * tied to the same poster session area ID.
    */
   public get id(): string {
-    throw new Error('Unimplemented');
+    return this._model.id;
   }
 
   /**
    * The title of the poster assigned to this area, or undefined if there is not one.
    */
   public get title(): string | undefined {
-    throw new Error('Unimplemented');
+    return this._model.title;
   }
 
   /**
@@ -71,14 +72,17 @@ export default class PosterSessionAreaController extends (EventEmitter as new ()
    *
    */
   public set title(title: string | undefined) {
-    throw new Error('Unimplemented');
+    if (this._model.title !== title) {
+        this._model.title = title;
+        this.emit('posterTitleChange', title);
+    }
   }
 
   /**
    * The image of the poster assigned to this area, or undefined if there is not one.
    */
   public get imageContents(): string | undefined {
-    throw new Error('Unimplemented');
+    return this._model.imageContents;
   }
 
   /**
@@ -87,14 +91,17 @@ export default class PosterSessionAreaController extends (EventEmitter as new ()
    * of players who starred the poster.
    */
   public set imageContents(imageContents: string | undefined) {
-    throw new Error('Unimplemented');
+    if (this._model.imageContents !== imageContents) {
+        this._model.imageContents = imageContents;
+        this.emit('posterImageContentsChange', imageContents);
+    }
   }
 
   /**
    * The number of stars of the poster assigned to this area.
    */
   public get stars(): number {
-    throw new Error('Unimplemented');
+    return this._model.stars;
   }
 
   /**
@@ -103,28 +110,31 @@ export default class PosterSessionAreaController extends (EventEmitter as new ()
    * Changing this value will emit a ‘posterStarChange' event to listeners
    */
   public set stars(stars: number) {
-    throw new Error('Unimplemented');
+    if (this._model.stars !== stars) {
+        this._model.stars = stars;
+        this.emit('posterStarChange', stars);
+    }
   }
 
   /**
    * The list of IDs of the players who starred the poster (with its current image)
    */
   public get playersWhoStarred(): string[] {
-    throw new Error('Unimplemented');
+    return this._playersWhoStarred;
   }
 
   /**
    * Add the specified player ID to the list of players who starred this poster.
    */
   public addPlayerWhoStarred(playerID: string) {
-    throw new Error('Unimplemented');
+    this._playersWhoStarred.push(playerID);
   }
 
   /**
    * @returns PosterSessionAreaModel that represents the current state of this PosterSessionAreaController
    */
   public posterSessionAreaModel(): PosterSessionAreaModel {
-    throw new Error('Unimplemented');
+    return this._model;
   }
 
   /**
@@ -145,19 +155,19 @@ export default class PosterSessionAreaController extends (EventEmitter as new ()
  * A hook that returns the number of stars for the poster session area with the given controller
  */
 export function useStars(controller: PosterSessionAreaController): number {
-  throw new Error('Unimplemented');
+  return controller.stars;
 }
 
 /**
  * A hook that returns the image contents for the poster session area with the given controller
  */
 export function useImageContents(controller: PosterSessionAreaController): string | undefined {
-  throw new Error('Unimplemented');
+  return controller.imageContents;
 }
 
 /**
  * A hook that returns the title for the poster session area with the given controller
  */
 export function useTitle(controller: PosterSessionAreaController): string | undefined {
-  throw new Error('Unimplemented');
+  return controller.title;
 }
