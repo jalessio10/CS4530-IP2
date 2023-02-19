@@ -1,0 +1,4 @@
+frontend/.env
+frontend/node_modules/
+townService/.env
+townService/node_modules/
