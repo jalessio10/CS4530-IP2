@@ -159,7 +159,7 @@ export function useStars(controller: PosterSessionAreaController): number {
   useEffect(() => {
     controller.addListener('posterStarChange', setStars);
     return () => {
-        controller.removeListener('posterStarChange', setStars);
+      controller.removeListener('posterStarChange', setStars);
     };
   }, [controller]);
   return stars;
@@ -169,26 +169,26 @@ export function useStars(controller: PosterSessionAreaController): number {
  * A hook that returns the image contents for the poster session area with the given controller
  */
 export function useImageContents(controller: PosterSessionAreaController): string | undefined {
-    const [imageContents, setImageContents] = useState(controller.imageContents);
-    useEffect(() => {
-      controller.addListener('posterImageContentsChange', setImageContents);
-      return () => {
-          controller.removeListener('posterImageContentsChange', setImageContents);
-      };
-    }, [controller]);
-    return imageContents;
+  const [imageContents, setImageContents] = useState(controller.imageContents);
+  useEffect(() => {
+    controller.addListener('posterImageContentsChange', setImageContents);
+    return () => {
+      controller.removeListener('posterImageContentsChange', setImageContents);
+    };
+  }, [controller]);
+  return imageContents;
 }
 
 /**
  * A hook that returns the title for the poster session area with the given controller
  */
 export function useTitle(controller: PosterSessionAreaController): string | undefined {
-    const [title, setTitle] = useState(controller.title);
-    useEffect(() => {
-      controller.addListener('posterTitleChange', setTitle);
-      return () => {
-          controller.removeListener('posterTitleChange', setTitle);
-      };
-    }, [controller]);
-    return title;
+  const [title, setTitle] = useState(controller.title);
+  useEffect(() => {
+    controller.addListener('posterTitleChange', setTitle);
+    return () => {
+      controller.removeListener('posterTitleChange', setTitle);
+    };
+  }, [controller]);
+  return title;
 }

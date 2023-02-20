@@ -7,7 +7,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  useToast,
+  //useToast,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useInteractable, usePosterSessionAreaController } from '../../../classes/TownController';
@@ -48,7 +48,7 @@ export function PosterImage({
   const title = useTitle(controller);
   const townController = useTownController();
   const curPlayerId = townController.ourPlayer.id;
-  const toast = useToast();
+  //const toast = useToast();
   useEffect(() => {
     townController.getPosterSessionAreaImageContents(controller);
   }, [townController, controller]);
