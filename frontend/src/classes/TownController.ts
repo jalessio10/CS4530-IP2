@@ -430,7 +430,15 @@ export default class TownController extends (EventEmitter as new () => TypedEmit
      * events (@see ViewingAreaController and @see ConversationAreaController and @see PosterSessionAreaController)
      */
     this._socket.on('interactableUpdate', interactable => {
-      // TODO
+      if (isViewingArea(interactable)) {
+        const viewingArea = interactable as ViewingAreaModel;
+      }
+      else if (isConversationArea(interactable)) {
+
+      }
+      else if (isPosterSessionArea(interactable)) {
+
+      }
     });
   }
 
