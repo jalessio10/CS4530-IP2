@@ -433,22 +433,26 @@ export default class TownController extends (EventEmitter as new () => TypedEmit
     this._socket.on('interactableUpdate', interactable => {
       if (isViewingArea(interactable)) {
         const viewingArea = interactable as ViewingAreaModel;
-        const viewingAreaController = this._viewingAreas.find(controller => controller.id === viewingArea.id) as ViewingAreaController;
+        const viewingAreaController = this._viewingAreas.find(
+          controller => controller.id === viewingArea.id,
+        ) as ViewingAreaController;
         viewingAreaController.updateFrom(viewingArea);
-      }
-      else if (isPosterSessionArea(interactable)) {
+      } else if (isPosterSessionArea(interactable)) {
         const posterArea = interactable as PosterSessionAreaModel;
-        const posterAreaController = this._posterSessionAreas.find(controller => controller.id === posterArea.id) as PosterSessionAreaController;
+        const posterAreaController = this._posterSessionAreas.find(
+          controller => controller.id === posterArea.id,
+        ) as PosterSessionAreaController;
         posterAreaController.updateFrom(posterArea);
-      }
-      else if (isConversationArea(interactable)) {
+      } else if (isConversationArea(interactable)) {
         const conversationArea = interactable as ConversationAreaModel;
-        const conversationAreaController = this._conversationAreasInternal.find(controller => controller.id === conversationArea.id) as ConversationAreaController;
+        const conversationAreaController = this._conversationAreasInternal.find(
+          controller => controller.id === conversationArea.id,
+        ) as ConversationAreaController;
         conversationAreaController.topic = conversationArea.topic;
         const newOccupants = this._playersByIDs(conversationArea.occupantsByID);
 
         if ((conversationAreaController.occupants.length === 0) != (newOccupants.length === 0)) {
-            this.emit('conversationAreasChanged', this._conversationAreasInternal);
+          this.emit('conversationAreasChanged', this._conversationAreasInternal);
         }
 
         conversationAreaController.occupants = newOccupants;
@@ -680,7 +684,7 @@ export default class TownController extends (EventEmitter as new () => TypedEmit
   public async getPosterSessionAreaImageContents(
     posterSessionArea: PosterSessionAreaController,
   ): Promise<string> {
-    throw new Error('Unimplemented');
+    return posterSessionArea.imageContents || 'fail';
   }
 
   /**
@@ -691,7 +695,7 @@ export default class TownController extends (EventEmitter as new () => TypedEmit
   public async incrementPosterSessionAreaStars(
     posterSessionArea: PosterSessionAreaController,
   ): Promise<number> {
-    throw new Error('Unimplemented');
+    return ++posterSessionArea.stars;
   }
 
   /**
